@@ -1,0 +1,23 @@
+
+html(lang="en")
+    include head
+    body
+        .nav.amber.lighten-2
+            .nav-wrapper
+                a.brand-logo(href="#" style="font-size:20px") Country Risk Dashboard
+        .row(style="padding-top:10vh")
+            .col.s12.l6.m6
+                .input-field.container.inline
+                    select#countryName
+                        each country in countries
+                            option(value=country.id) #{country.countryName}
+                    label Select Country
+                    a.btn.waves-effect.btn#submitCountry Submit
+        .row(style="padding-top:10vh" data-chart="hdiChart")
+            .col.s12.l8.m8.offset-m1.offset-l1
+                h5.rank
+                #hdiChart
+        .row(style="padding-top:10vh" data-chart="genderInequalityChart")
+            .col.s12.l8.m8.offset-m1.offset-l1
+                #genderInequalityChart
+    script(src="/js/graphs.js")
