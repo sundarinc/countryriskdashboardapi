@@ -25,6 +25,6 @@ const ApiRouter = require('./routes/api');
 app.use('/', PagesRouter);
 app.use('/api', ApiRouter);
 
-app.listen(3000, ()=> console.log('Listening on Port 3000'));
+app.listen(process.env.PORT || 3000, ()=> console.log('Listening on Port 3000'));
 
 
