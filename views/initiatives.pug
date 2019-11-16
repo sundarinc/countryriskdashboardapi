@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+html(lang="en")
+    include head
+    title Initiatives
+    body
+        .nav.amber.lighten-2
+            .nav-wrapper(style="padding:10px")
+                a.brand-logo(href="#")
+                    img(src="/images/logo-s@2x.png", alt="Sundar" style="height:25px")
+        .row
+            .col.s12
+                ul.tabs
+                    li.tab.col.s12.m6
+                        a(href="#newInitiative")
+                            h6 New
+                    li.tab.col.s12.m6
+                        a(href="#updateInitiative")
+                            h6 Update
+        .row#newInitiative
+            h3 New Initiatives
+        .row#updateInitiative
+            .row
+                .col.s12.m6.input-field.inline
+                    select#selectedInit
+                        each init in initiatives
+                            option(value=init.id) #{init.name}
+                    label Select Initiative
+                    a.btn.waves-effect#loadInit Submit
+            .row#infoRow
+                .col.s12.m6#detailsCard
+                    .card(style="padding:20px")
+                        .card-title.center(data-init-title) Details
+                        .card-content
+                            .input-field
+                                input(type="text")#name
+                                label(for="name") Name
+                            .input-field
+                                textarea#lang1.materialize-textarea
+                                label(for="lang1") Description
+                            .input-field
+                                textarea#lang2.materialize-textarea
+                                label(for="lang2") Educational Language
+                            .input-field
+                                input(type="text")#imageUrl
+                                label(for="imageUrl") Image URL
+                            .row
+                                .col.s6
+                                    p
+                                        label
+                                            input(type="checkbox", name="labor")#labor
+                                            span Labor
+                                .col.s6
+                                    p
+                                        label
+                                            input(type="checkbox", name="environment")#env
+                                            span Environment
+                .col.s12.m6#scoreCard
+                    .card(style="padding:20px")
+                        .card-title.center(data-init-title) Score
+                        .card-content
+                            .input-field
+                                input(type="number")#governanceScore
+                                label(for="governanceScore") Governance Score
+                            .input-field
+                                input(type="number")#transparencyScore
+                                label(for="transparencyScore") Transparency Score
+                            .input-field
+                                input(type="number")#robustnessScore
+                                label(for="robustnessScore") Robustness Score
+                            .input-field
+                                input(type="number")#capacityScore
+                                label(for="capacityScore") Capacity Score
+                            .input-field
+                                input(type="number")#overallScore
+                                label(for="overallScore") Overall Score
+        .row
+            .col.s12.m6#loadPointDistributionChart
+        .row
+            .col.s12.m6
+                button.btn.waves-effect.amber#updateInitiativeBtn Update                                   
+                        
+            
+
+    script(src="/js/initiatives.js")
