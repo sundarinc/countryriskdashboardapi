@@ -23,6 +23,40 @@ $(document).ready(function(){
         }
     })
 
+    function loadInitCharts(){
+        for(let x in initArray){
+            let points = ['governanceScore', 'transparencyScore', 'robustnessScore', 'capacityScore']
+            let allAvailable = true;
+            points.forEach((el) => {
+                if(!initArray[x][el]){
+                    allAvailable = false;
+                }
+            })
+            if(allAvailable){
+                let chartId = 'score'+initArray[x].id
+                let data = [
+                    {
+                        values: points.map((el) => initArray[x][el]),
+                        labels: points.map((el) => _.startCase(el)),
+                        type: 'pie'
+                    }
+                ];
+                console.log(data);
+                let options = {
+                    title: 'Score Distribution',
+                    height: 400,
+                    width: 500
+                };
+    
+                // console.log(data);
+                Plotly.newPlot(chartId, data, options, {responsive: true});
+
+            }
+        }
+    }
+
+    loadInitCharts();
+
     function loadPointDistributionChart(obj){
         let points = ['governanceScore', 'transparencyScore', 'robustnessScore', 'capacityScore']
         let allAvailable = true;

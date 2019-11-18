@@ -23,8 +23,10 @@ async function createCountIndexForInitiatives(){
             let count = await suppliers.find({initId: obj.id}).count()
             obj.supplierCount = count;
             delete obj['_id'];
-            let operator = await suppliers.updateOne({id: obj.id}, {
-                $set: obj
+            let operator = await table.updateOne({id: obj.id}, {
+                $set: {
+                    supplierCount: count
+                }
             });
             console.log(`Updated ${obj.name} with supplier count ${count}`);
         }
@@ -32,6 +34,8 @@ async function createCountIndexForInitiatives(){
         throw new Error(error);
     }
 }
+
+createCountIndexForInitiatives();
 
 async function removeLaborParticipation(){
    try {

@@ -16,7 +16,7 @@ router.get('/', async function(req, res, next){
 router.get('/initiatives', async function(req, res, next){
     try {
         let table = await db.getCursor('initiatives');
-        let results = await table.find({}).project({id: 1, name: 1}).toArray();
+        let results = await table.find({}).sort({supplierCount: -1}).toArray();
         console.log(results);
         return res.render('initiatives.pug', {initiatives: results});
     } catch (error) {

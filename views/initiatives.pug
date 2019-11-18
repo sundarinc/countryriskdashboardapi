@@ -12,12 +12,32 @@ html(lang="en")
                 ul.tabs
                     li.tab.col.s12.m6
                         a(href="#newInitiative")
-                            h6 New
+                            h6 View
                     li.tab.col.s12.m6
                         a(href="#updateInitiative")
                             h6 Update
         .row#newInitiative
-            h3 New Initiatives
+            h3 View Initiatives
+            .row
+                .col.s12.l12
+                    table.table(style="margin-left:20px")
+                        thead
+                            tr
+                                th #
+                                th Name
+                                th Supplier Count
+                                th Score Distribution
+                                td Init Strength
+                        tbody
+                            each init, index in initiatives
+                                tr
+                                    td= index+1
+                                    td #{init.name}
+                                    td #{init.supplierCount}
+                                    td
+                                        div(data-value="scoreDistribution" data-init-id=init.id id="score"+init.id)
+                                    td
+                                        div(data-value="initStrength" data-init-id=init.id id="strength"+init.id)
         .row#updateInitiative
             .row
                 .col.s12.m6.input-field.inline
@@ -80,5 +100,6 @@ html(lang="en")
                 button.btn.waves-effect.amber#updateInitiativeBtn Update                                   
                         
             
-
+    script.
+        let initArray = !{JSON.stringify(initiatives).replace(/<\//g, '<\\/')};
     script(src="/js/initiatives.js")
