@@ -13,6 +13,26 @@ async function loadFile(){ // Load File
 
 // loadFile();
 
+async function createCountIndexForInitiatives(){
+    try {
+        let table = await db.getCursor('initiatives');
+        let results = await table.find({}).project({id: 1, name: 1}).toArray();
+        let suppliers = await db.getCursor('initiativeData');
+        for(let r in results){
+            let obj = results[r];
+            let count = await suppliers.find({initId: obj.id}).count()
+            obj.supplierCount = count;
+            delete obj['_id'];
+            let operator = await suppliers.updateOne({id: obj.id}, {
+                $set: obj
+            });
+            console.log(`Updated ${obj.name} with supplier count ${count}`);
+        }
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
 async function removeLaborParticipation(){
    try {
     let table = await db.getCursor('countryRanking');
@@ -54,3 +74,5 @@ function createLoaderFile(){
 // testCountryName();
 
 // removeLaborParticipation();
+
+// createCountIndexForInitiatives();
