@@ -1,6 +1,7 @@
 // Load All countries and write to a file;
 const db = require('../controllers/db');
 const util = require('../controllers/util');
+const uuid = require('uuid/v4')
 
 async function loadFile(){ // Load File
     try {
@@ -35,7 +36,7 @@ async function createCountIndexForInitiatives(){
     }
 }
 
-createCountIndexForInitiatives();
+// createCountIndexForInitiatives();
 
 async function removeLaborParticipation(){
    try {
@@ -72,6 +73,54 @@ function createLoaderFile(){
         throw new Error(error);
     }
 }
+
+// b9fc930e-9f64-45e8-a2c9-9b10b999f20f
+
+async function add2SuppleirstoGots(){
+    try {
+        let table = await db.getCursor('initiativeData');
+        let dataToSend = [
+            {
+                initId: `b9fc930e-9f64-45e8-a2c9-9b10b999f20f`,
+                name: "ero dyeing",
+                id: uuid(),
+                cc: 'IN'
+            },
+            {
+                initId: `b9fc930e-9f64-45e8-a2c9-9b10b999f20f`,
+                name: "cta apparels",
+                id: uuid(),
+                cc: 'IN'
+            }
+        ]
+        await table.insertMany(dataToSend);
+        console.log('Inserted');
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+async function loadBuyersUnique(){
+    try {
+        let table = await db.getCursor('testBuyerList');
+        let results = await table.distinct('buyerName')
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+
+async function testMetaTags(){
+    try {
+        await util.getMetaTagsFromUrl('http://www.apexfootwearltd.com/');
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+testMetaTags();
+
+// add2SuppleirstoGots();
 
 // createLoaderFile();
 

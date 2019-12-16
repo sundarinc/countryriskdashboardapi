@@ -1,5 +1,7 @@
 let router = require('express').Router();
 let db = require('../controllers/db');
+let news = require('../jobs/loadCountryNews');
+
 
 router.get('/getCountryInfo', async function(req, res, next){
     let countryId = req.query.id;
@@ -36,6 +38,20 @@ router.post('/updateInit', async function(req, res, next){
         let table = await db.getCursor('initiatives');
         let result = await table.updateOne({id: query}, {$set: newData});
         return res.status(200).json(result);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json(error);
+    }
+});
+
+
+router.get('/news', async function(req, res, next){
+    var country = req.query.country;
+    country = country.replace(" ","%20");
+    try {
+        let dataset = await news.getCountryNewsLatest(country);
+        console.log(dataset);
+        return res.status(200).json(dataset);
     } catch (error) {
         console.error(error);
         return res.status(500).json(error);

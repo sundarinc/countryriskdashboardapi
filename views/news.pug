@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+html(lang="en")
+    include head
+    body
+        .nav.amber.lighten-2
+            .nav-wrapper
+                a.brand-logo(href="#" style="font-size:20px") News Dashboard
+        .row(style="padding-top:10vh")
+            .col.s12.m3.l3.input-field
+                select#countryNews
+                    option(value="India") Select
+                    option(value="India") India
+                    option(value="Bangladesh") Bangladesh
+                    option(value="China") China
+                    option(value="Cambodia") Vietnam
+                    option(value="Sri Lanka") Sri Lanka
+                    option(value="Pakistan") Pakistan
+                label(for="countryNews") Select Country
+        .row
+            .col.s12.m10.l10#loadedNews
+                table.table
+                    thead
+                        tr
+                            th Date
+                            th Source
+                            th Description
+                            th Relevant
+                    tbody#newsContent
+            .col.s12.m6.l6#preLoadedNews    
+    script(src="/js/news.js")                    
+
+                    

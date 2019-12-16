@@ -22,6 +22,10 @@ router.get('/initiatives', async function(req, res, next){
     } catch (error) {
         
     }
+});
+
+router.get('/news', function(req, res, next){
+    return res.render('news');
 })
 
 module.exports = router;

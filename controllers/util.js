@@ -79,6 +79,22 @@ let util = {
         else {
             return rows;
         }
+    },
+    saveToScraperStorage: function(filename, obj){
+        let filePath = this.createPath(__dirname, '../scraperStorage'+filename+'/.json');
+        let str = JSON.stringify(obj, null, 2);
+        fs.writeFileSync(filePath, str, 'utf-8');
+        console.log(`${filePath} Updated`);
+    },
+    getMetaTagsFromUrl: async function(url){
+        try {
+            let $ = await this.makeGetRequest(url, true);
+            $('meta').each(function(){
+                console.log(this.attributes);
+            })
+        } catch (error) {
+            throw new Error('Cannot Connect to Website');
+        }
     }
 }
 
